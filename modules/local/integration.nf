@@ -1,4 +1,5 @@
-// Integration processes
+// Integration CLI calls which create `sbml_dfs` from individual sources
+
 process INTEGRATE_REACTOME {
     memory '16.GB'
     time '1.h'

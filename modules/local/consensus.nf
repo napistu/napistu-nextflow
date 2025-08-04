@@ -1,4 +1,4 @@
-// Consensus and post-processing
+// Consensus CLI calls
 process CREATE_CONSENSUS {
     memory '64.GB'
     cpus 16
@@ -16,23 +16,5 @@ process CREATE_CONSENSUS {
         --nondogmatic \\
         ${models.join(' ')} \\
         consensus.pkl
-    """
-}
-
-process DROP_COFACTORS {
-    memory '16.GB'
-    time '30.min'
-    
-    input:
-    path consensus_model
-    
-    output:
-    path "sbml_dfs.pkl", emit: final_model
-    
-    script:
-    """
-    python -m napistu refine drop_cofactors \\
-        ${consensus_model} \\
-        sbml_dfs.pkl
     """
 }
