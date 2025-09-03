@@ -4,10 +4,41 @@ Nextflow pipeline for building consensus pathway networks using Napistu.
 
 ## Quick Start
 
+### NextFlow
+
+NextFlow runs in a Java Virtual Machine (JVM). For Homebrew installation:
+
+```bash
+brew install openjdk@17
+echo 'export JAVA_HOME="/opt/homebrew/opt/openjdk@17"' >> ~/.zshrc
+```
+
+Once, Java is setup, you can install Nextflow with
+
 ```bash
 # Install Nextflow
 curl -s https://get.nextflow.io | bash
+# Move nextflow to the directory that's already in your PATH
+mv nextflow ~/.local/bin/
+# Test it works
+nextflow info
+```
 
+### Running
+
+#### Setup Docker
+
+- e.g., install and load `Docker Desktop`
+
+#### Test Pathway (merging a handful of Reactome pathways)
+
+```bash
+nextflow run workflows/test_pathway.nf -profile test_pathway,docker
+```
+
+#### Multi-source consensus
+
+```bash
 # Run the pipeline
 nextflow run . --species "Homo sapiens" --outdir results -profile docker
 
