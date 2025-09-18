@@ -13,14 +13,14 @@ process INTEGRATE_REACTOME {
     script:
     """
     python -m napistu integrate reactome \\
-        ${reactome_dir}/sbml/pw_index.tsv \\
-        reactome.pkl \\
+        --permissive \\
         --species "${params.species}" \\
-        --permissive
+        ${reactome_dir}/sbml/pw_index.tsv \\
+        reactome.pkl
     """
 }
 
-process INTEGRATE_STRING {
+process INTEGRATE_STRING_DB {
     memory '32.GB'
     time '2.h'
     
@@ -69,6 +69,51 @@ process INTEGRATE_BIGG {
         --species "${params.species}" \\
         ${bigg_dir}/pw_index.tsv \\
         bigg.pkl
+    """
+}
+
+process INTEGRATE_REACTOME_FI {
+    memory '8.GB'
+    time '30.min'
+    
+    input:
+    path reactome_fi_file
+    
+    output:
+    path "reactome_fi.pkl", emit: model
+    
+    script:
+    """
+    python -m napistu integrate reactome_fi ${reactome_fi_file} reactome_fi.pkl
+    """
+}
+
+process INTEGRATE_INTACT {
+    memory '16.GB'
+    time '1.h'
+    
+    input:
+    path intact_dir
+    
+    output:
+    path "intact.pkl", emit: model
+    
+    script:
+    """
+    python -m napistu integrate intact ${intact_dir} "${params.species}" intact.pkl
+    """
+}
+
+process INTEGRATE_OMNIPATH {
+    memory '8.GB'
+    time '45.min'
+    
+    output:
+    path "omnipath.pkl", emit: model
+    
+    script:
+    """
+    python -m napistu integrate omnipath -o "${params.species}" omnipath.pkl
     """
 }
 

@@ -1,0 +1,41 @@
+# Nextflow execution files
+work/
+.nextflow/
+.nextflow.log*
+*.html
+*.txt
+trace-*
+timeline-*
+report-*
+
+# Output directories
+results/
+test_results/
+test_pathway_results/
+
+# Docker and container logs
+*.log
+
+# Python cache (if any local scripts)
+__pycache__/
+*.pyc
+*.pyo
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local environment files
+.env
+.env.local
+
+# Temporary files
+*.tmp
+*.temp

@@ -51,3 +51,55 @@ process INGEST_BIGG {
     python -m napistu ingestion bigg bigg
     """
 }
+
+process INGEST_HPA_SUBCELL {
+    memory '4.GB'
+    time '20.min'
+    
+    output:
+    path "hpa_subcell.tsv", emit: hpa_file
+    
+    script:
+    """
+    python -m napistu ingestion proteinatlas-subcell hpa_subcell.tsv
+    """
+}
+
+process INGEST_INTACT {
+    memory '8.GB'
+    time '1.h'
+    
+    output:
+    path "intact_xmls", emit: intact_dir
+    
+    script:
+    """
+    python -m napistu ingestion intact intact_xmls "${params.species}"
+    """
+}
+
+process INGEST_REACTOME_FI {
+    memory '2.GB'
+    time '15.min'
+    
+    output:
+    path "reactome_fi.tsv", emit: reactome_fi_file
+    
+    script:
+    """
+    python -m napistu ingestion reactome_fi reactome_fi.tsv
+    """
+}
+
+process INGEST_GTEX_RNASEQ {
+    memory '4.GB'
+    time '30.min'
+    
+    output:
+    path "gtex_rnaseq.tsv", emit: gtex_file
+    
+    script:
+    """
+    python -m napistu ingestion gtex-rnaseq-expression gtex_rnaseq.tsv
+    """
+}

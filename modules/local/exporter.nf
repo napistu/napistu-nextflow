@@ -40,3 +40,21 @@ process EXPORT_DISTANCES {
         precomputed_distances.parquet
     """
 }
+
+process EXPORT_SBML_DFS_TABLES {
+    memory '8.GB'
+    time '30.min'
+    
+    input:
+    path sbml_dfs
+    
+    output:
+    path "sbml_dfs_tables", emit: tables_dir
+    
+    script:
+    """
+    python -m napistu exporter export_smbl_dfs_tables \\
+        ${sbml_dfs} \\
+        sbml_dfs_tables
+    """
+}
